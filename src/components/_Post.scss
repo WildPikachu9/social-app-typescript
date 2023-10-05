@@ -1,0 +1,40 @@
+.Post {
+    display: flex;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: 1px solid #000;
+
+    & > * {
+        padding: 5px;
+    }
+
+    .Avatar img {
+        height: 50px;
+        border-radius: 50%;
+    }
+
+    .PostData {
+        width: 100%;
+
+        .PostMeta {
+            display: flex;
+            padding: 5px;
+            justify-content: space-between;
+
+            .Author {
+                font-weight: 700;
+            }
+        }
+
+        .PostContent {
+            padding: 5px;
+            text-align: left;
+        }
+
+        .Likes {
+            padding: 5px;
+            text-align: right;
+        }
+    }
+}
+
