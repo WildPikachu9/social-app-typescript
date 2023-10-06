@@ -1,9 +1,12 @@
 import './_Post.scss';
-import PostScript from '../typescript/PostScript';
+import { PostItem } from '../types/PostItem';
 import { useState } from 'react';
 
+interface Post {
+    post: PostItem;
+}
 
-const Post: React.FC<{ post: PostScript }> = ({ post }) => {
+const Post: React.FC<Post> = ({ post }) => {
 
     const [likesCount, setLikesCount] = useState(post.likes.length);
 

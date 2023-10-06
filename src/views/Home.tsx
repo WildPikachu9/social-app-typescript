@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import './_Home.scss';
 import axios from 'axios';
 import Post from '../components/Post';
-import PostScript from '../typescript/PostScript';
+import { PostItem } from '../types/PostItem';
 
 const Home = () => {
 
-    const [posts, setPosts] = useState<PostScript[]>([]);
+    const [posts, setPosts] = useState<PostItem[]>([]);
 
     const getLatestPosts = () => {
         axios.post('https://akademia108.pl/api/social-app/post/latest')
@@ -38,7 +38,7 @@ const Home = () => {
     return (
         <div className='Home'>
             <div className='PostList'>
-                {posts.map((post: PostScript, id: number) => {
+                {posts.map((post: PostItem, id: number) => {
                     return <Post post={post} key={id}/>
                 })}
                 <button className='Btn' onClick={getNextPosts}>Load more</button>
