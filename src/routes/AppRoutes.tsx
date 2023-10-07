@@ -2,12 +2,14 @@ import { Route, Routes } from 'react-router-dom';
 import Home from '../views/Home';
 import Login from '../views/Login';
 import SignUp from '../views/SignUp';
+import { AppRoutesProps } from '../types/User';
+import { FC } from 'react';
 
-const AppRoutes = () => {
+const AppRoutes: FC<AppRoutesProps> = ({ user, setUser }) => {
     return (
         <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/login' element={<Login />} />
+            <Route path='/login' element={<Login user={user} setUser={setUser}/>} />
             <Route path='/signup' element={<SignUp />} />
         </Routes>
     )

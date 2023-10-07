@@ -1,19 +1,21 @@
 import { Link } from "react-router-dom";
 import './_AppNav.scss';
+import { AppRoutesProps } from '../types/User';
+import { FC } from 'react';
 
-const AppNav = () => {
+const AppNav: FC<AppRoutesProps> = ({ user }) => {
     return (
         <nav className="AppNav">
             <ul>
                 <li>
                     <Link to='/'>Home</Link>
                 </li>
-                <li>
+               {!user && <li>
                     <Link to='/login'>Login</Link>
-                </li>
-                <li>
+                </li>}
+                {!user && <li>
                     <Link to='/signup'>SignUp</Link>
-                </li>
+                </li>}
             </ul>
         </nav>
     )

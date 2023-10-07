@@ -10,9 +10,9 @@ const Home = () => {
 
     const getLatestPosts = () => {
         axios.post('https://akademia108.pl/api/social-app/post/latest')
-        .then((req) => {
+        .then((res) => {
             
-            setPosts(req.data);
+            setPosts(res.data);
         })
         .catch((error) => {
             console.error(error);
