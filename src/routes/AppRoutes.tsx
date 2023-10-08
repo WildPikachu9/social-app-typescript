@@ -8,8 +8,8 @@ import { FC } from 'react';
 const AppRoutes: FC<AppRoutesProps> = ({ user, setUser }) => {
     return (
         <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/login' element={<Login user={user} setUser={setUser}/>} />
+            <Route path='/' element={<Home user={user} setUser={setUser} />} />
+            <Route path='/login' element={<Login user={user} setUser={setUser} />} />
             <Route path='/signup' element={<SignUp />} />
         </Routes>
     )

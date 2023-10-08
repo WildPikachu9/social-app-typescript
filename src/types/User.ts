@@ -11,5 +11,5 @@ export interface User {
 
 export interface AppRoutesProps {
     user: User | null;
-    setUser: (user: User) => void;
+    setUser: (user: User | null) => void;
 }

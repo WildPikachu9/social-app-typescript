@@ -3,8 +3,10 @@ import './_Home.scss';
 import axios from 'axios';
 import Post from '../components/Post';
 import { PostItem } from '../types/PostItem';
+import { AppRoutesProps } from '../types/User';
+import { FC } from 'react';
 
-const Home = () => {
+const Home: FC<AppRoutesProps> = ({ user }) => {
 
     const [posts, setPosts] = useState<PostItem[]>([]);
 
@@ -33,7 +35,7 @@ const Home = () => {
 
     useEffect(() => {
         getLatestPosts();
-    }, []);
+    }, [user]);
     
     return (
         <div className='Home'>
