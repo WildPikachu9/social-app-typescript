@@ -10,19 +10,17 @@ const AppNav: FC<AppRoutesProps> = ({ user, setUser }) => {
         e.preventDefault();
 
         axios
-        .post('https://akademia108.pl/api/social-app/user/logout')
-        .then((res) => {
-            console.log(res.data);
-            
-            if(res.data.message) {
-                setUser(null);
-                localStorage.setItem('user', JSON.stringify(res.data));
-            };
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-    }
+            .post('https://akademia108.pl/api/social-app/user/logout')
+            .then((res) => {
+                if(res.data.message) {
+                    setUser(null);
+                    localStorage.setItem('user', JSON.stringify(res.data));
+                };
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
 
     return (
         <nav className="AppNav">

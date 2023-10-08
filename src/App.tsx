@@ -9,7 +9,7 @@ import axios from 'axios';
 function App() {
 
   const [user, setUser] = useState<User | null>(null);
-
+  
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
 
