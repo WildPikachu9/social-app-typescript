@@ -1,13 +1,19 @@
-import { FC, useState } from 'react';
+import { useState } from 'react';
+import { FC, FormEvent } from 'react';
 import './_Login.scss';
-import { LoginType } from '../types/LoginType';
+import { LoginForm } from '../types/LoginForm';
 import axios from 'axios';
-import { AppRoutesProps } from '../types/User';
 import { Navigate } from 'react-router-dom';
+import { User } from '../types/User';
 
-const Login: FC<AppRoutesProps>  = ({ user, setUser }) => {
+interface AppNavProps {
+    user: User | null;
+    setUser: (user: User | null) => void;
+}
 
-    const [formData, setFormData] = useState<LoginType>({
+const Login: FC<AppNavProps>  = ({ user, setUser }) => {
+
+    const [formData, setFormData] = useState<LoginForm>({
         username: '',
         password: '',
     });
@@ -22,7 +28,7 @@ const Login: FC<AppRoutesProps>  = ({ user, setUser }) => {
         })
     };
 
-    const handleSubmit = (e: any): void => {
+    const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
         axios.post('https://akademia108.pl/api/social-app/user/login', {
             username: formData.username,

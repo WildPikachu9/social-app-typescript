@@ -1,12 +1,17 @@
 import { Link } from "react-router-dom";
 import './_AppNav.scss';
-import { AppRoutesProps } from '../types/User';
 import { FC } from 'react';
 import axios from "axios";
+import { User } from '../types/User';
 
-const AppNav: FC<AppRoutesProps> = ({ user, setUser }) => {
+interface AppNavProps {
+    user: User | null;
+    setUser: (user: User | null) => void;
+}
 
-    const handleLogout = (e: any): void => {
+const AppNav: FC<AppNavProps> = ({ user, setUser }) => {
+
+    const handleLogout = (e: React.MouseEvent<HTMLAnchorElement>): void => {
         e.preventDefault();
 
         axios

@@ -1,12 +1,17 @@
 import './_AddPost.scss';
 import axios from "axios";
 import { useState } from 'react';
+import { ChangeEvent, FormEvent } from 'react';
 
-const AddPost = ({ getPrevPosts }: any) => {
+interface AddPostProps {
+    getPrevPosts: () => void;
+}
+
+const AddPost: React.FC<AddPostProps> = ({ getPrevPosts }) => {
 
     const [postContent, setPostContent] = useState('');
     
-    const addPost = (e: any) => {
+    const addPost = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
         if(!postContent) {
             return;
@@ -32,7 +37,7 @@ const AddPost = ({ getPrevPosts }: any) => {
         >
             <textarea 
                 placeholder='Add post...' 
-                onChange={(e:any): void => setPostContent(e.target.value)}
+                onChange={(e: ChangeEvent<HTMLTextAreaElement>): void => setPostContent(e.target.value)}
                 value={postContent}
             ></textarea>
             <button className='Btn'>Add</button>
