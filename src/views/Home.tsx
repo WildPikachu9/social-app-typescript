@@ -62,7 +62,7 @@ const Home: FC<AppNavProps> = ({ user }) => {
             {user && <AddPost getPrevPosts={getPrevPosts} />}
             <div className='PostList'>
                 {posts.map((post: PostItem) => {
-                    return <Post post={post} key={post.id}/>
+                    return <Post post={post} key={post.id} user={user} setPosts={setPosts}/>
                 })}
                 <button className='Btn' onClick={getNextPosts}>Load more</button>
             </div>
