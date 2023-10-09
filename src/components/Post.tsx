@@ -14,6 +14,7 @@ const Post: React.FC<PostProps> = ({ post, user, setPosts }) => {
 
     const [likesCount, setLikesCount] = useState(post.likes.length);
     const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+    const [doesUserLiked, setDoesUserLiked] = useState(post.likes.filter(like => like.username === user?.username).length !== 0);
 
     const deletePost = (id: number): void => {
         axios
@@ -29,6 +30,20 @@ const Post: React.FC<PostProps> = ({ post, user, setPosts }) => {
             console.error(error);
         });
     };
+
+    const likePost = (id: number, isLiked: boolean): void => {
+        axios
+        .post('https://akademia108.pl/api/social-app/post/' + (isLiked ? 'dislike' : 'like'), {
+            post_id: id
+        })
+        .then(() => {
+            setLikesCount(likesCount + (isLiked ? -1 : 1));
+            setDoesUserLiked(!isLiked);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    }
 
     return (
         <div className='Post'>
@@ -51,6 +66,7 @@ const Post: React.FC<PostProps> = ({ post, user, setPosts }) => {
                     {user?.username === post.user.username && (
                         <button className='Btn' onClick={() => setDeleteModalVisible(true)}>Delete</button>
                     )}
+                    <button className='Btn' onClick={() => likePost(post.id, doesUserLiked)}>{doesUserLiked ? 'Dislike' : 'Like'}</button>
                     {likesCount}
                 </div>
             </div>
