@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FC, FormEvent } from 'react';
+import { FC, FormEvent, ChangeEvent } from 'react';
 import './_Login.scss';
 import { LoginForm } from '../types/LoginForm';
 import axios from 'axios';
@@ -19,7 +19,7 @@ const Login: FC<AppNavProps>  = ({ user, setUser }) => {
     });
     const [loginMessage, setLoginMessage] = useState('');
 
-    const handleInputChange = (e: any): void => {
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
         const target = e.target;
         const name = target.name;
         setFormData({
