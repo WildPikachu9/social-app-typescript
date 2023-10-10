@@ -6,6 +6,7 @@ import { PostItem } from '../types/PostItem';
 import { FC } from 'react';
 import AddPost from '../components/AddPost';
 import { User } from '../types/User';
+import FollowRecommendations from '../components/FollowRecommendations';
 
 interface AppNavProps {
     user: User | null;
@@ -60,9 +61,11 @@ const Home: FC<AppNavProps> = ({ user }) => {
     return (
         <div className='Home'>
             {user && <AddPost getPrevPosts={getPrevPosts} />}
+            {user && <FollowRecommendations user={user} getLatestPosts={getLatestPosts} posts={posts} />}
             <div className='PostList'>
                 {posts.map((post: PostItem) => {
-                    return <Post post={post} key={post.id} user={user} setPosts={setPosts}/>
+                    return <Post post={post} key={post.id} user={user} setPosts={setPosts} 
+                    getLatestPosts={getLatestPosts}/>
                 })}
                 <button className='Btn' onClick={getNextPosts}>Load more</button>
             </div>

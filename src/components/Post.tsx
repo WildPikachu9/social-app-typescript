@@ -8,9 +8,10 @@ interface PostProps {
     post: PostItem;
     user: User | null;
     setPosts: React.Dispatch<React.SetStateAction<PostItem[]>>;
+    getLatestPosts:  () => void;
 }
 
-const Post: React.FC<PostProps> = ({ post, user, setPosts }) => {
+const Post: React.FC<PostProps> = ({ post, user, setPosts, getLatestPosts }) => {
 
     const [likesCount, setLikesCount] = useState(post.likes.length);
     const [deleteModalVisible, setDeleteModalVisible] = useState(false);
@@ -43,7 +44,19 @@ const Post: React.FC<PostProps> = ({ post, user, setPosts }) => {
         .catch((error) => {
             console.error(error);
         });
-    }
+    };
+
+    const unfollow = (id: number): void => {
+        axios.post('https://akademia108.pl/api/social-app/follows/disfollow', {
+            leader_id: id
+        })
+        .then(() => {
+            getLatestPosts();
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    };
 
     return (
         <div className='Post'>
@@ -64,9 +77,27 @@ const Post: React.FC<PostProps> = ({ post, user, setPosts }) => {
                 </div>
                 <div className="Likes">
                     {user?.username === post.user.username && (
-                        <button className='Btn' onClick={() => setDeleteModalVisible(true)}>Delete</button>
+                        <button 
+                            className='Btn' 
+                            onClick={() => setDeleteModalVisible(true)}
+                        >
+                            Delete
+                        </button>
                     )}
-                    <button className='Btn' onClick={() => likePost(post.id, doesUserLiked)}>{doesUserLiked ? 'Dislike' : 'Like'}</button>
+
+                    {user && user.username !== post.user.username ? (
+                        <button className='Btn' onClick={() => unfollow(post.user.id)}>Unfollow</button>
+                    ) : null}
+
+                    {user && (
+                    <button 
+                        className='Btn' 
+                        onClick={() => likePost(post.id, doesUserLiked)}
+                    >
+                        {doesUserLiked ? 'Dislike' : 'Like'}
+                    </button>
+                    )}
+
                     {likesCount}
                 </div>
             </div>

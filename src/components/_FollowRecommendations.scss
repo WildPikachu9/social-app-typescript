@@ -1,0 +1,22 @@
+.FollowRecommendations {
+    display: flex;
+    margin: auto;
+    padding: 5px;
+    max-width: 600px;
+    border: 1px solid #000;
+
+    .FollowRecommendation {
+        padding: 15px;
+        width: 33.33%;
+
+        img {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+        }
+
+        h3 {
+            margin: 5px;
+        }
+    }
+}

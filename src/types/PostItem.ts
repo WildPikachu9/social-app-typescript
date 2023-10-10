@@ -8,5 +8,6 @@ export interface PostItem {
     likes: Like[];
     updated_at: string;
     user: User;
+    getLatestPosts: () => void;
 };
 
